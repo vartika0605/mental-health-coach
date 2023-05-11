@@ -1,0 +1,11 @@
+--> to check all the virtual environments
+conda env list
+
+--> to create a new environment
+conda create -n myflaskenv flask python=3.6 (including flask will download flask in that environment)
+
+--> to activate the environment
+activate <name of your env>
+
+--> 
+

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mental health predictor</title>
+	<link rel="stylesheet" href="../static/index.css">
+</head>
+<style>
+	body{
+		background-image: url(../static/index_img.png);
+		
+	} 
+	html{
+		background: linear-gradient(to right bottom, #89a4fb, #82a0f4);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+	}
+	.container {
+  width: 600px;
+  margin: auto;
+  padding: 36px 48px 48px 48px;
+  background-color: #a0bfc7;
+
+  border-radius: 11px;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+}
+.login-title {
+  padding: 15px;
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.login-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 16px;
+}
+.login-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+.sbt:hover{
+color:rgb(227, 232, 236);
+background-color: #82a0f4;
+}
+.login-form input {
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 9px;
+  border: none;
+}
+.nav {
+  width: 100%;
+  background-color: #1A237E;
+  display: flex;
+  align-items: center;
+}
+.nav > .nav-header {
+  flex: 0.95;
+  padding-left: 1rem;
+}
+.nav > .nav-header > .nav-title {
+  font-size: 22px;
+  color: #fff;
+}
+.nav > .nav-list {
+  display: flex;
+  gap: 2rem;
+}
+.nav > .nav-list > li {
+  list-style-type: none;
+}
+.nav > .nav-list > li a {
+  text-decoration: none;
+  color: #efefef;
+  cursor: pointer;
+}
+.nav > #nav-check {
+    display: none;
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 1rem;
+  }
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-top: 0.2rem;
+  }
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  .nav > .nav-btn > label:hover,
+  .nav #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav > .nav-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    background-color: #1A237E;
+    height: 0;
+    transition: all 0.3s ease-in;
+    top: 40px;
+    left: 0;
+  }
+  .nav > .nav-list > li {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+  .nav > #nav-check:checked ~ .nav-list {
+    height: calc(100vh - 50px);
+  }
+}
+	</style>
+<body >
+	<nav class="nav">
+		<input type="checkbox" id="nav-check">
+		<div class="nav-header">
+		  <div class="nav-title">
+			MENTAL PREDICTION MODEL
+		  </div>
+		</div>
+		<div class="nav-btn">
+		  <label for="nav-check">
+			<span></span>
+			<span></span>
+			<span></span>
+		  </label>
+		</div>
+		
+		<ul class="nav-list">
+			<li><a href="{{url_for('home')}}">About</a></li>
+			<li><a href="{{url_for('ques')}}">form</a></li>
+		
+		</ul>
+	  </nav>
+	<!-- <h3  style="color:blueviolet"></h3> -->
+
+	<div class="container">
+		<h2 class="login-title">Fill the below form</h2>
+		<!-- <img src="{{url_for('static', filename='bg.png')}}" align=middle alt="background image"/> -->
+		<form class="login-form" action="/predict" style=" font-size: medium; font-weight: bold; justify-content: center;text-align: center;" >
+			<!-- <h4 style="font-size:25px; color:rgb(0, 21, 114)">Enter Your Age</h4> -->
+			<fieldset>
+			<label for="age" style="font-size:19px ;color:rgb(10, 7, 36)">Enter your Age</label>
+			<select id="age" class="age" name="age">
+				<option value="0">0-20</option>
+				<option value="1">21-30</option>
+				<option value="2"> 31-65</option>
+				<option value="3">66-100</option>
+			</select>
+			<!-- <input type="text" id="age" name="age"> -->
+			<br><br>
+			<!-- <h4 style="font-size:25px; color:rgb(0, 21, 114)">Select Your Gender</h4> -->
+			<label for="gender_class" style="font-size:19px ;color:rgb(10, 7, 36)">Select Your Gender</label>
+			<select id="gender_class" class="gender_class" name="gender">
+			<option value="1">Male</option>
+			<option value="0">Female</option>
+			<option value="2">Trans</option>
+			
+			</select>
+			<br>
+			<br>
+			<!-- <h4 style="font-size:25px;color:rgb(0, 21, 114)">Do you have a family history of mental illness ?</h4> -->
+			<label for="family_history" style="font-size:19px ;color:rgb(10, 7, 36)">Do you have a family history of mental illness ?</label>
+			<select id="family_history" name="family_history">
+			<option value="1">Yes</option>
+			<option value="0">No</option>
+
+			
+			</select>
+			<br>
+			<br>
+			<!-- <h4 style="font-size:25px;color:rgb(0, 21, 114)">Does your employer provide mental health benefits?</h4> -->
+			<label for="Benefits" style="font-size:19px ;color:rgb(10, 7, 36)">Does your employer provide mental health benefits?</label>
+			<select id="Benefits" name="benefits">
+			<option value="2">Yes</option>
+			<option value="1">No</option>
+			<option value="0">Don't know</option>
+
+			
+			</select>
+			<br>
+			<!-- <h4 style="font-size:25px;color:rgb(0, 21, 114)">Do you know the options for mental health care your employer provides?</h4> -->
+			<label for="care_options" style="font-size:19px ;color:rgb(10, 7, 36)">Do you know the options for mental health care your employer provides?</label>
+			<select id="care_options" name="care_options">
+			<option value="2">Yes</option>
+			<option value="0">No</option>
+			<option value="1">Don't Know</option>
+
+			
+			</select>
+			
+			<!-- <br>
+			<h4 style="font-size:25px;color:rgb(0, 21, 114)"> Are you self Employed ?</h4>
+			<label for="self_employed" style="font-size:19px ;color:rgb(10, 7, 36)">Self_Employed</label>
+			<select id="self_employed" name="self_employed">
+			<option value="0">Yes</option>
+			<option value="1">No</option>
+			</select> -->
+<br>
+			<br>
+
+			<!-- <h4 style="font-size:25px;color:rgb(0, 21, 114)">Is your anonymity protected if you choose to take  -->
+				<!-- advantage of mental health or substance abuse treatment resources? </h4> -->
+			<label for="anonymity" style="font-size:19px ;color:rgb(10, 7, 36)">Is your anonymity protected if you choose to take 
+				advantage of mental health or substance abuse treatment resources?</label>
+			<select id="anonymity" name="anonymity">
+			<option value="0">Don't know</option>
+			<option value="1">No</option>
+			<option value="2">Yes</option>
+			</select>
+
+			<br><br>
+
+			<!-- <h4 style="font-size:25px;color:rgb(0, 21, 114)">How easy is it for you to take medical leave for a 
+				mental health condition?</h4> -->
+			<label for="leave" style="font-size:19px ;color:rgb(10, 7, 36); ">How easy is it for you to take medical leave for a 
+				mental health condition?</label>
+			<select id="leave" name="leave">
+			<option value="0">Don't know</option>
+			<option value="1">Other options(somewhat difficult, very difficult)</option>
+			<option value="2">Somewhat easy</option>
+			</select>
+<br>
+			<br>
+			<!-- <h4 style="font-size:25px;color:rgb(0, 21, 114)">If you have a mental health condition, do you feel that it interferes with your work?</h4> -->
+			<label for="work_interfere" style="font-size:19px ;color:rgb(10, 7, 36)">If you have a mental health condition, do you feel that it interferes with your work?</label>
+			<select id="work_interfere" name="work_interfere">
+			<option value="0">NA</option>
+			<option value="1">Never</option>
+			<option value="2">Often</option>
+			<option value="3">Rarely</option>
+			<option value="4">Sometimes</option>
+			</select>
+			
+<br><br>
+			<input class="sbt" type="submit" value="Submit" style="color:rgb(23, 110, 187); font-size: larger;font-weight: bolder;">
+		</fieldset>
+		</form>
+
+		
+	</div>
+</body>
+</html>

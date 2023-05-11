@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mental health predictor</title>
+	<link rel="stylesheet" href="../static/index.css">
+</head>
+<style>
+	body {
+		background-image: url(../static/home_image.png);
+	}
+	p{
+		text-align: justify;
+		text-overflow: ellipsis;
+		color: #081329;
+		font-size: 24px;
+		font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		font-weight: bold;
+	}
+	#chk{
+		color: rgb(20, 15, 77);
+		font-size: 25px;
+		font-weight: bolder;
+		
+		
+	}
+	#sb:hover{
+		background-color: #09162e;
+	}
+	
+	span{
+		color: #09162e;	}
+		.nav {
+  width: 100%;
+  background-color: #1A237E;
+  display: flex;
+  align-items: center;
+}
+.nav > .nav-header {
+  flex: 0.95;
+  padding-left: 1rem;
+}
+.nav > .nav-header > .nav-title {
+  font-size: 22px;
+  color: #fff;
+}
+.nav > .nav-list {
+  display: flex;
+  gap: 2rem;
+}
+.nav > .nav-list > li {
+  list-style-type: none;
+}
+.nav > .nav-list > li a {
+  text-decoration: none;
+  color: #efefef;
+  cursor: pointer;
+}
+.nav > #nav-check {
+    display: none;
+}
+
+@media (max-width: 480px) {
+  .nav {
+    padding: 1rem;
+  }
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-top: 0.2rem;
+  }
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  .nav > .nav-btn > label:hover,
+  .nav #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav > .nav-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    background-color: #1A237E;
+    height: 0;
+    transition: all 0.3s ease-in;
+    top: 40px;
+    left: 0;
+  }
+  .nav > .nav-list > li {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+  .nav > #nav-check:checked ~ .nav-list {
+    height: calc(100vh - 50px);
+  }
+}
+</style>
+<body >
+	<nav class="nav">
+		<input type="checkbox" id="nav-check">
+		<div class="nav-header">
+		  <div class="nav-title">
+			MENTAL HEALTH PREDICTION MODEL
+		  </div>
+		</div>
+		<div class="nav-btn">
+		  <label for="nav-check">
+			<span></span>
+			<span></span>
+			<span></span>
+		  </label>
+		</div>
+		
+		<ul class="nav-list">
+			<li><a href="{{url_for('home')}}">About</a></li>
+			<li><a href="{{url_for('ques')}}">form</a></li>
+		
+		</ul>
+	  </nav>
+	<!-- <h3 style="color:blueviolet" ></h3> -->
+<p>Anxiety and depression are common and debilitating mental disorders that can cause significant impairment in daily functioning, physical health, and cognition. Understanding how symptoms of these clinical disorders are expressed can aid in <span>early detection</span>, progress of AI-aided virtual therapy platforms, and general clarification of differential <b>linguistic</b> properties between anxiety and depression.</p>
+	<p > So this model  prompt some questions to users to answer  related to mental symptoms and using the data sets available the model will try to predict  if the user should consider visiting a psychiatrist.</p>
+	
+	<p id="chk">So check if you should consider visiting psychiatrist or not and save yourself from anxiety and depression</p>
+<br><br>
+	<div>
+		
+		<form action="/ques" style=" font-size: medium; font-weight: bold;" >
+			<input id="sb" type="submit" value="Show Questions" style="color:rgb(127, 214, 255); font-size:15px; padding:10px 10px;background-color: darkslateblue;margin-left: 35%; width:30%; font-weight: bolder;">
+	</div>
+</body>
+</html>
